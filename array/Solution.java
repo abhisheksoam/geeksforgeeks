@@ -18,22 +18,24 @@ import java.util.Map;
 public class Solution {
 
 	public static void main(String[] args) {
-		int [] a = {1,9,5,6,3,2,4,5,7};
-		int n = a.length;
+	
+		int [] a = {-2,-3,4,-1,-2,1,5,-3};
+		System.out.println(largestSumContiguousArray(a, a.length));
+		//		int n = a.length;
 //		majorityElement_2(input);
 	
 //		findOdd(input);
-		int i;
-	    int x1 = a[0]; /* For xor of all the elements in array */
-	    int x2 = 1; /* For xor of all the elements from 1 to n+1 */
-	     
-	    for (i = 1; i< n; i++)
-	        x1 = x1^a[i];
-	            
-	    for ( i = 2; i <= n+1; i++)
-	        x2 = x2^i;         
-	    
-	    System.out.println(x1^x2);
+//		int i;
+//	    int x1 = a[0]; /* For xor of all the elements in array */
+//	    int x2 = 1; /* For xor of all the elements from 1 to n+1 */
+//	     
+//	    for (i = 1; i< n; i++)
+//	        x1 = x1^a[i];
+//	            
+//	    for ( i = 2; i <= n+1; i++)
+//	        x2 = x2^i;         
+//	    
+//	    System.out.println(x1^x2);
 	}
 	
 	/**
@@ -217,6 +219,26 @@ public class Solution {
 		return sum;
 	}
 	
+	
+	/**
+	 *  Largest Sum Contiguous array 
+	 */
+	
+	public static int largestSumContiguousArray(int[] input,int n){
+//		int[][] process = new int[n+1][n+1];
+		int max = Integer.MIN_VALUE;
+		for(int i=0;i<n;i++){
+			int sum =0;
+			for(int j=i;j<n;j++){
+				sum = sum + input[j];
+//				process[i][j] = sum;
+				if(sum>max){
+					max = sum;
+				}
+			}
+		}
+		return max;
+	}
 	
 	
 		
