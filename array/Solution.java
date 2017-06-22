@@ -1,17 +1,21 @@
 package array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+
+
 /**
  * 
  * @author abhishek
- *	Uncompleted Question: 
- *
+ *	Uncompleted Function: 
+ *  sortElementByFrequency_v3
  *	
  */
 
@@ -19,11 +23,14 @@ public class Solution {
 
 	public static void main(String[] args) {
 
-		int [] input = {1,2,3,6,9};
+		int [] input = {1, 60, -10, 70, -80, 85};
 		int [] input1 = {4,6,8,10};
-		reverseArray(input);
-//		System.out.println(medianSorted(input, input1));
-
+		//		leadersInArray(input);
+		//		System.out.println(medianSorted(input, input1));
+		//		sortElementByFrequency_v2(input);
+		//		System.out.println(countInversion(input));
+		sumClosetToZero(input);
+		
 	}
 
 	/**
@@ -251,11 +258,11 @@ public class Solution {
 		}
 		return max_so_far;
 	}
-	
+
 	/**
 	 * Search an element in a sorted and rotated array 
 	 */
-	
+
 	// Brute Force  [O(n)] 
 	/**
 	 * 
@@ -273,14 +280,14 @@ public class Solution {
 	}
 
 	// TODO: Binary Search Approach
-	
+
 	/**
 	 * Merge an array of size n into another array of size m+n.
 	 * There are two sorted arrays. First one is of size m+n containing only m elements. 
 	 * Another one is of size n and contains n elements.
 	 * Merge these two arrays into the first array of size m+n such that the output is sorted.
 	 */
-	
+
 	public static void mergeArray(int[] inputN, int[] inputMandN){
 		int[] inputM = new int[inputMandN.length-inputN.length];
 		int k =0;
@@ -295,7 +302,7 @@ public class Solution {
 			}
 		}
 		k =0;
-		
+
 		//Comparing and placing into inputMandN
 		while(k<inputM.length && j<inputN.length){
 			if(inputM[k]>inputN[j]){
@@ -306,7 +313,7 @@ public class Solution {
 				k++;				
 			}
 			m++;
-			
+
 		}
 
 		while(k<inputM.length){
@@ -314,19 +321,19 @@ public class Solution {
 			k++;	
 			m++;
 		}
-		
+
 		while(j<inputN.length){
 			inputMandN[m] = inputN[j];
 			j++;
 			m++;
 		}
-		
-		
+
+
 		// Printing inputMandN array
 		for(int i:inputMandN){
 			System.out.print(i+" ");
 		}
-		
+
 	}
 
 	/**
@@ -352,29 +359,29 @@ public class Solution {
 				k++;
 			}
 		}
-		
+
 		while(i<input.length){
 			proc[k] = input[i];
 			i++;
 			k++;
 		}
-		
+
 		while(j<input1.length){
 			proc[k] = input1[j];
 			j++;
 			k++;
 		}
-		
+
 		return (proc[input.length-1]+proc[input.length])/2;
 	}
-	
+
 	//TODO: Log(n) version
-	
+
 	/**
 	 *   Program to reverse an array
 	 *   Number of swaps will be half of the size of input
 	 */
-	
+
 	public static void reverseArray(int[] input){
 		int startIndex = 0;
 		int endIndex = input.length-1;
@@ -388,12 +395,226 @@ public class Solution {
 			startIndex++;
 			endIndex--;
 		}
-		
+
 		for(int i:input){
 			System.out.print(i+" ");
 		}
 	}
-	
-	
+
+	/**
+	 * Reversal algorithm for array rotation
+	 */
+
+	public static void reversalRotation(int[] input, int d){
+		d = d % input.length;
+		int k,m;
+		k = m = 0;
+		int[] proc =  new int[input.length];
+		for(int i=d;i<input.length;i++){
+			proc[k] = input[i];
+			k++;
+		}
+
+		while(m<d){
+			proc[k] = input[m];
+			k++;
+			m++;
+		}
+
+		for(int i: proc){
+			System.out.print(i+ " ");
+		}
+
+	}
+
+
+	/**
+	 * Leaders in an array
+	 * An element is leader if it is greater than all the elements to its right side.
+	 */
+
+	public static void leadersInArray(int[] input){
+		ArrayList<Integer> leadersList = new ArrayList<Integer>();
+		int maxElementTillNow = Integer.MIN_VALUE;
+		for(int i=input.length-1;i>=0;i--){
+			if(input[i]>maxElementTillNow){
+				maxElementTillNow = input[i];
+				leadersList.add(input[i]);
+			}
+		}
+
+		for(int i:leadersList){
+			System.out.print(i+" ");
+		}
+
+	}
+
+	/**
+	 *  Sort elements by frequency
+	 *  Print the elements of an array in the decreasing frequency 
+	 *  if 2 numbers have same frequency then print the one which came first.
+	 */
+
+
+	static class SortbyCount implements Comparator<Pair<Integer,Integer>>
+	{
+		// Used for sorting in ascending order of
+		public int compare(Pair<Integer,Integer> a, Pair<Integer,Integer> b)
+		{
+			return  b.count-a.count;
+		}
+	}
+
+
+	static class Pair<T,V> {
+		public T index;
+		public V count;
+
+		public Pair(T first, V second) {
+			this.index = first;
+			this.count = second;
+		}
+	}
+
+	public static void sortElementByFrequency(int[] input){
+		Arrays.sort(input);
+		for(int i:input){
+			System.out.print(i+" ");
+		}
+		System.out.println();
+		ArrayList<Pair<Integer, Integer>> list = new ArrayList<Solution.Pair<Integer,Integer>>();
+		int previous_element = input[0];
+		int previous_element_count = 1;
+		int previous_element_first_index = 0;
+		int k = 0;
+		for(int i=1;i<input.length;i++){
+			if(previous_element==input[i]){
+				previous_element_count++;
+			}else{
+				Pair<Integer, Integer> pair = new Pair<Integer, Integer>(previous_element_first_index, previous_element_count);
+				list.add(pair);
+				previous_element_first_index = i;
+				previous_element_count = 1;
+				previous_element = input[i];
+			}
+		}
+
+		for(Pair p:list){
+			System.out.print(p.count+" ");
+		}
+		// Sort list on the basis of index 1
+		Collections.sort(list, new SortbyCount());
+		System.out.println();
+		for(Pair p:list){
+			System.out.print(p.count+" ");
+		}
+
+
+
+	}
+
+	// Using HashMap
+	public static void sortElementByFrequency_v2(int[] input){
+
+		HashMap<Integer,Pair<Integer, Integer>> map = new HashMap<Integer, Pair<Integer,Integer>>();
+		for(int i=0;i<input.length;i++){
+			if(map.containsKey(input[i])){
+				Pair<Integer, Integer> pair = map.get(input[i]);
+				pair.count++;
+				map.put(input[i], pair);
+			}else{
+				Pair<Integer, Integer> pair = new Solution.Pair<Integer, Integer>(i,1);
+				pair.index = i;
+				pair.count = 1;
+				map.put(input[i], pair);
+			}
+		}
+		ArrayList<Pair<Integer, Integer>> list = new ArrayList<Solution.Pair<Integer,Integer>>();
+		Iterator it = map.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry)it.next();
+			list.add((Pair<Integer, Integer>) pair.getValue());
+			it.remove();
+		}
+		Collections.sort(list, new SortbyCount());
+		Integer previous_count = 0;
+		for(Pair p:list){
+			int x = (int)p.count;
+			while(x>0){
+				System.out.print(input[(int)p.index]+" ");
+				x--;
+			}
+
+
+		}
+
+	}
+
+
+	// Using BST 
+	public static void sortElementByFrequency_v3(int[] input){
+
+	}
+
+
+	/**
+	 * Count Inversions in an array
+	 * Inversion Count for an array indicates – how far (or close) the array is from being sorted.
+	 * If array is already sorted then inversion count is 0. If array is sorted in reverse order 
+	 * that inversion count is the maximum. Formally speaking, two elements a[i] and a[j] 
+	 * form an inversion if a[i] > a[j] and i < j
+	 */
+
+	// Brute Force O[n*2] 
+
+	public static int countInversion(int[] input){
+		int swaps_needed = 0;
+		for(int i=0;i<input.length;i++){
+			for(int j=i+1;j<input.length;j++){
+				if(input[i]>input[j]){
+					swaps_needed++;
+				}
+			}
+		}
+		return swaps_needed;
+	}
+
+	public static int countInversion_v2(int[] input){
+		int swaps_needed = 0;
+		// Just implement any less complexity sorting algorithm but make
+		// sure you count each swap
+		return swaps_needed;
+	}
+
+
+	/**
+	 * Two elements whose sum is closest to zero
+	 */
+	// Brute Force [O(n*n)]
+	public static void sumClosetToZero(int[] input){
+		int sum = Integer.MAX_VALUE;
+		for(int i=0;i<input.length;i++){
+			for(int j=i+1;j<input.length;j++){
+				int value = input[i]+input[j];
+				value = Math.abs(0-value);
+				if(value<sum){
+					sum = value;
+				}
+			}
+		}
+		System.out.println(sum);
+	}	
+
+	// Optimized Approach
+	public static void sumClosetToZero_v2(int[] input){
+		
+	}
+
+
+
+
+
+
+
 
 }
