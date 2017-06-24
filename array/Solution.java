@@ -8,6 +8,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.PriorityQueue;
 
 
 
@@ -23,16 +25,23 @@ public class Solution {
 
 	public static void main(String[] args) {
 
-		int [] input = {0, 1, 0, 0, 0, 0, 1, 0, 1, 0};
-		int [] input1 = {4,6,8,10};
+		int [] input = {12, 34, 45, 9, 8, 90, 3};
+		int [] input1 = {2, 3, 5, 6};
 		//		leadersInArray(input);
 		//		System.out.println(medianSorted(input, input1));
 		//		sortElementByFrequency_v2(input);
 		//		System.out.println(countInversion(input));
 		//		sumClosetToZero(input);
 		//		twoSmallestElement(input);
-//		majortiyElementInSortedArray(input);
-		segrate0and1(input);
+		//		majortiyElementInSortedArray(input);
+		//		segrate0and1(input);
+		//		kLargest_v1(input, 3);
+		//		kLargest_v2(input, 3);
+		//		maximumDifference(input);
+		//		maximumDifference_v2(input);
+		//		unionAndIntersection(input, input1, "intersection");
+		//		unionAndIntersection(input, input1, "union");
+		segregateEvenAndOdd(input);
 	}
 
 	/**
@@ -696,21 +705,170 @@ public class Solution {
 			l++;
 			r--;
 		}
-		
+
 		for(int i:input){
 			System.out.print(i+" ");
 		}
-		
+
 	}
 
 	/**
 	 * Write an efficient program for printing k largest elements in an array.
 	 * Elements in array can be in any order.
 	 */
-	
-	
+
+	// Sorting Algorithm
+	public static void kLargest_v1(int[] input, int k){
+		Arrays.sort(input);
+		int i = input.length-1;
+		while(k>0){
+			System.out.println(input[i]);
+			k--;
+			i--;
+		}
+	}
+
+	// Using Heap Algorithm
+	public static void kLargest_v2(int[] input, int k){
+		PriorityQueue<Integer> queue = new PriorityQueue<>(input.length, Collections.reverseOrder());
+		for(int i=0;i<input.length;i++){
+			queue.offer(input[i]);
+		}
+		while(k>0){
+			System.out.println(queue.poll());
+			k--;
+		}
+	}
+
+	//Using Order Statistics
+	public static void kLargest_v3(int[] input, int k){
+
+	}
 
 
+	/**
+	 * Maximum difference between two elements such that larger element appears after the smaller number
+	 * Given an array arr[] of integers, find out the difference between any two elements such that larger element appears after the smaller number in arr[].
+	 */
+
+	// Brute Force
+	public static void maximumDifference(int[] input){
+		int maximumDifference = Integer.MIN_VALUE;
+		for(int i=0;i<input.length;i++){
+			for(int j=i+1;j<input.length;j++){
+				if(input[j]>input[i]){
+					int diff = input[j] - input[i];
+					if(diff>maximumDifference){
+						maximumDifference = diff;
+					}
+				}
+			}
+		}
+
+		System.out.println(maximumDifference);
+
+	}
+
+	// Efficient Solution 
+	public static void maximumDifference_v2(int[] input){
+		int maximumDifference = Integer.MIN_VALUE;
+		int minElement = input[0];
+		for(int i=1;i<input.length;i++){
+			if(input[i]>minElement){
+				if(input[i]-minElement>maximumDifference){
+					maximumDifference = input[i]-minElement;
+				}
+			}else{
+				minElement = input[i];
+			}
+		}
+
+		System.out.println(maximumDifference);
+	}
+
+	/**
+	 * Union and Intersection of two sorted arrays
+	 */
+
+	public static void unionAndIntersection(int[] input,int[] input1, String keyword){
+		HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+		for(int i=0;i<input.length;i++){
+			map.put(input[i],true);
+		}
+		switch (keyword) {
+		case "union":
+			for(int i=0;i<input1.length;i++){
+				map.put(input1[i], true);
+			}
+			Iterator<Entry<Integer, Boolean>> it = map.entrySet().iterator();
+			while(it.hasNext()){
+				Entry<Integer,Boolean> pair = it.next();
+				System.out.print(pair.getKey()+" ");
+			}
+			break;
+		case "intersection":
+			for(int i=0;i<input1.length;i++){
+				if(map.containsKey(input1[i])){
+					System.out.print(input1[i]+" ");
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	
+	/**
+	 * Ceiling and floor in a sorted array 
+	 */
+	
+	// Linear Search 
+	public static void ceilAndFloor(int[] input, int x){
+		for(int i=1;i<input.length-1;i++){
+			if(input[i]==x){
+				System.out.println("Ceil:"+" "+x+" Floor:"+x);
+				return;
+			}
+			
+			// TODO
+			
+		}
+	}
+	
+	/**
+	 * Segregate Even and Odd numbers
+	 */
+	
+	public static void segregateEvenAndOdd(int[] input){
+		int l = 0;
+		int r = input.length-1;
+		while(l<r){
+			if(input[l]%2!=0){
+				if(input[r]%2==0){
+					int swapValue = input[l];
+					input[l] = input[r];
+					input[r] = swapValue;
+					l++;
+					r--;
+				}else{
+					r--;
+				}
+			}else{
+				if(input[r]%2==0){
+					l++;
+				}else{
+					l++;
+					r--;
+				}
+			}
+		}
+		
+		for(int i:input){
+			System.out.print(i+" ");
+		}
+	}
+	
+	
 
 
 }

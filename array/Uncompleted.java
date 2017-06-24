@@ -12,8 +12,9 @@ public class Uncompleted{
 	 */
 	
 	/**
-	 * k largest(or smallest) elements in an array
-	 * http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/
+	 * Maximum size square sub-matrix with all 1s
+	 * http://www.geeksforgeeks.org/maximum-size-sub-matrix-with-all-1s-in-a-binary-matrix/
+	 * 
 	 */
 	
 }
