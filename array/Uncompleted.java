@@ -11,4 +11,9 @@ public class Uncompleted{
 	 *  http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/
 	 */
 	
+	/**
+	 * k largest(or smallest) elements in an array
+	 * http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/
+	 */
+	
 }

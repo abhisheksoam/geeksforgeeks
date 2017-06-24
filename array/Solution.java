@@ -23,14 +23,16 @@ public class Solution {
 
 	public static void main(String[] args) {
 
-		int [] input = {1, 60, -10, 70, -80, 85};
+		int [] input = {0, 1, 0, 0, 0, 0, 1, 0, 1, 0};
 		int [] input1 = {4,6,8,10};
 		//		leadersInArray(input);
 		//		System.out.println(medianSorted(input, input1));
 		//		sortElementByFrequency_v2(input);
 		//		System.out.println(countInversion(input));
-		sumClosetToZero(input);
-		
+		//		sumClosetToZero(input);
+		//		twoSmallestElement(input);
+//		majortiyElementInSortedArray(input);
+		segrate0and1(input);
 	}
 
 	/**
@@ -605,14 +607,108 @@ public class Solution {
 		System.out.println(sum);
 	}	
 
-	// Optimized Approach
-	public static void sumClosetToZero_v2(int[] input){
+	/**
+	 * Find the smallest and second smallest elements in an array 
+	 */
+	public static void twoSmallestElement(int[] input){
+		int smallestElement = Integer.MAX_VALUE;
+		int secondSmallestElement = Integer.MAX_VALUE;
+		for(int i=0;i<input.length;i++){
+			if(input[i]<smallestElement){
+				smallestElement = input[i];
+			}
+		}
+
+		for(int i=0;i<input.length;i++){
+			if(input[i]<secondSmallestElement&& input[i]>smallestElement){
+				secondSmallestElement = input[i];
+			}
+		}
+
+		System.out.println(smallestElement+" "+secondSmallestElement);
+
+	}
+
+	// in one traversal 
+	public static void twoSmallestElement_v2(int[] input){
+
+	}
+
+	/**
+	 * Check for Majority Element in a sorted array
+	 */
+
+	// Linear Approach O[n]
+	public static void majortiyElementInSortedArray(int[] input){
+		int n = input.length/2;
+		int previousElement = input[0];
+		int previousElementIndex = 0;
+		for(int i=1;i<input.length;i++){
+			if(previousElementIndex+n<input.length){
+				if(input[previousElement+n-1]==previousElement){
+					System.out.println("Element Found"+" "+input[i]);
+					return;
+				}
+			}
+			if(input[i]!=previousElement){
+				previousElement = input[i];
+				previousElementIndex = i;
+			}
+		}
+	}
+
+	//Binary Search
+	public static void majortiyElementInSortedArray_v2(int[] input){
+
+	}
+
+	/**
+	 * Maximum and minimum of an array using minimum number of comparisons
+	 */
+
+	public static void maximumAndMinimum(int[] input){
+		int minimum = Integer.MAX_VALUE;
+		int maximum = Integer.MIN_VALUE;
+		for(int i=0;i<input.length;i++){
+			if(input[i]>maximum){
+				maximum = input[i];
+			}else if(input[i]<minimum){
+				minimum = input[i];
+			}
+		}
+		System.out.println("minimum :"+" "+minimum+"And maximum:"+" "+maximum);
+	}
+
+	/**
+	 * Segregate 0s and 1s in an array
+	 */
+
+	public static void segrate0and1(int[] input){
+		int l =0;
+		int r = input.length-1;
+		while(l<r){
+			if(input[l]==1){
+				input[l] = 0;
+			} 
+			if(input[r]==0){
+				input[r] = 1;
+			}
+			l++;
+			r--;
+		}
+		
+		for(int i:input){
+			System.out.print(i+" ");
+		}
 		
 	}
 
-
-
-
+	/**
+	 * Write an efficient program for printing k largest elements in an array.
+	 * Elements in array can be in any order.
+	 */
+	
+	
 
 
 
