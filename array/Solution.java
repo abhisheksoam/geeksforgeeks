@@ -25,7 +25,7 @@ public class Solution {
 
 	public static void main(String[] args) {
 
-		int [] input = {12, 34, 45, 9, 8, 90, 3};
+		int [] input = {1,2,3,4,5,6,7,8,9};
 		int [] input1 = {2, 3, 5, 6};
 		//		leadersInArray(input);
 		//		System.out.println(medianSorted(input, input1));
@@ -41,8 +41,39 @@ public class Solution {
 		//		maximumDifference_v2(input);
 		//		unionAndIntersection(input, input1, "intersection");
 		//		unionAndIntersection(input, input1, "union");
-		segregateEvenAndOdd(input);
+		//		segregateEvenAndOdd(input);
+		//		findTwoRepeating(input);
+		//		ceilAndFloor(input, 5);
+		//		sort012(input);
+		//		findDuplicates(input);
+		//		nextGreaterElement(input);
+		//		areElementsConsecutive(input);
+		//		smallestMissingNumber(input, 10);
+		//		findMinimumDistanceBetweenTwoNumbers(input, 3, 2);
+		//		System.out.println(binarySearch(input, 0, input.length-1, 7));
+
 	}
+
+
+
+	/**
+	 * Binary Search
+	 */
+
+	public static int binarySearch(int[] input, int low, int high,int x){
+		if(low>high){
+			return -1;
+		}
+		int mid = low + (high-low)/2;
+		if(input[mid]==x){
+			return mid;
+		}else if(x > input[mid]){
+			return binarySearch(input, mid+1, high, x);
+		}else{
+			return binarySearch(input, low, mid-1, x);
+		}
+	}
+
 
 	/**
 	 *  Sum of the elements in the given array
@@ -817,28 +848,19 @@ public class Solution {
 			break;
 		}
 	}
-	
+
 	/**
 	 * Ceiling and floor in a sorted array 
 	 */
-	
-	// Linear Search 
+
 	public static void ceilAndFloor(int[] input, int x){
-		for(int i=1;i<input.length-1;i++){
-			if(input[i]==x){
-				System.out.println("Ceil:"+" "+x+" Floor:"+x);
-				return;
-			}
-			
-			// TODO
-			
-		}
+
 	}
-	
+
 	/**
 	 * Segregate Even and Odd numbers
 	 */
-	
+
 	public static void segregateEvenAndOdd(int[] input){
 		int l = 0;
 		int r = input.length-1;
@@ -862,13 +884,222 @@ public class Solution {
 				}
 			}
 		}
-		
+
 		for(int i:input){
 			System.out.print(i+" ");
 		}
 	}
-	
-	
+
+
+	/**
+	 *  Find the two repeating elements in a given array
+	 */
+
+	public static void findTwoRepeating(int[] input){
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for(int i:input){
+			if(map.containsKey(i)){
+				System.out.print(i+" ");
+			}else{
+				map.put(i,1);
+			}
+		}
+	}
+
+	/**
+	 * A Product Array Puzzle
+	 */
+
+	public static void productArrayPuzzle(int[] input){
+
+	}
+
+	/**
+	 * Sort an array of 0s, 1s and 2s 
+	 */
+	// Brute Force O[2n] = O[n]
+	public static void sort012(int[] input){
+		int zero_count = 0;
+		int one_count = 0;
+		int two_count = 0;
+		for(int i:input){
+			if(i==0){
+				zero_count++;
+			}else if(i==1){
+				one_count++;
+			}else{
+				two_count++;
+			}
+		}
+		int k =0;
+		while(zero_count-->0){
+			input[k] = 0;
+			k++;
+		}
+		while(one_count-->0){
+			input[k] = 1;
+			k++;
+		}
+		while(two_count-->0){
+			input[k] = 2;
+			k++;
+		}
+		for(int i:input){
+			System.out.print(i+" ");
+		}
+	}
+
+	//In one loop
+	public static void sort012_v1(int[] input){
+
+	}
+
+	/**
+	 *  Find the Minimum length Unsorted Subarray,
+	 *  sorting which makes the complete array sorted
+	 */
+
+	public static void minimumLengthUnsortedSubarray(int[] input){
+
+	}
+
+	/**
+	 * Find duplicates in O(n) time and O(1) extra space
+	 */
+	public static void findDuplicates(int[] input){
+		for(int i=0;i<input.length;i++){
+			int value = input[Math.abs(input[i])];
+			if(value > 0){
+				input[Math.abs(input[i])] = -input[Math.abs(input[i])];
+			}else{
+				System.out.print(Math.abs(input[i])+" ");
+			}
+		}
+	} 
+
+
+	/**
+	 *  Equilibrium index of an array
+	 */
+
+	public static void equilibriumIndex(int[] input){
+		int l = 0;
+		int r = input.length-1;
+		while(l<r){
+
+		}
+	}
+
+	/**
+	 * Search in a row wise and column wise sorted matrix
+	 */
+
+	public void searchInDoubleMatrix(int[][] input, int x){
+
+	}
+
+	/**
+	 * Next Greater Element 
+	 */
+	// Brute Force
+	public static void nextGreaterElement(int[] input){
+		Boolean out = false;
+		for(int i=0;i<input.length;i++){
+			int value = input[i];
+			for(int j = i+1 ;j<input.length;j++){
+				if(input[j]>value){
+					out = true;
+					System.out.println(input[j]);
+					break;
+				}
+			}
+			if(out!=true){
+				System.out.println(-1);
+			}
+			out = false;
+
+		}
+	}
+
+	/**
+	 * Check if array elements are consecutive 
+	 */
+	public static void areElementsConsecutive(int[] input){
+
+
+
+	}
+
+	/**
+	 * Find the smallest missing number
+	 */
+	// T Complexity O[n] and S Complexity O[n]
+	public static void smallestMissingNumber(int[] input,int m){
+		HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+		for(int i:input){
+			map.put(i, true);
+		}
+		for(int i=0;i<m;i++){
+			if(!map.containsKey(i)){
+				System.out.println(i);
+				return;
+			}
+		}
+
+	}
+
+	/**
+	 * Count number of occurrences (or frequency) in a sorted array
+	 */
+
+	public static void countNumberOfOccurences(int[] input,int x){
+
+	}
+
+	/**
+	 * Find the minimum distance between two numbers
+	 */
+
+	public static void findMinimumDistanceBetweenTwoNumbers(int[] input, int first, int second){
+		Boolean firstNumberPresence = false;
+		Boolean secondNumberPresence = false;
+		int firstNumberIndex = -1;
+		int secondNumberIndex =-1;
+		int min = Integer.MAX_VALUE;
+
+		for(int i=0;i<input.length;i++){
+			if(input[i] == first){
+				firstNumberPresence = true;
+				firstNumberIndex = i;
+
+			}else if(input[i]==second){
+				secondNumberPresence = true;
+				secondNumberIndex = i;
+			}
+
+			if(firstNumberPresence&&secondNumberPresence){
+				int value = Math.abs(secondNumberIndex-firstNumberIndex);
+				if(value<min){
+					min = value; 
+				}
+				firstNumberPresence = false;
+				secondNumberPresence = false;
+			}
+		}
+
+		System.out.println(min);
+	}
+
+	/**
+	 * Find a Fixed Point (Value equal to index) in a given array
+	 */
+
+	// Simple Traversal
+
+
+
+
+
 
 
 }

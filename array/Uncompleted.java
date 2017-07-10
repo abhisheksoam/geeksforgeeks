@@ -17,4 +17,16 @@ public class Uncompleted{
 	 * 
 	 */
 	
+	/**
+	 * Median in a stream of integers (running integers)
+	 */
+	
+	/**
+	 *  Ignored Questions which aren't that important
+	 *  Turn an image by 90 degree 
+	 *  http://www.geeksforgeeks.org/turn-an-image-by-90-degree/
+	 */
+	
+
+	
 }
