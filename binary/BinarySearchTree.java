@@ -17,6 +17,36 @@ public class BinarySearchTree {
 		root = new BinarySearchTreeNode<Integer>(data);
 		size = 0;
 	}
+	
+	
+	/**
+	 *  Foldable Binary Tree
+	 *  Given a binary tree, find out if the tree can be folded or not.
+	 */
+	
+	
+	
+	
+	/**
+	 * Print all nodes at distance k from root
+	 */
+	// Root version
+	public void printNodeAtDistanceK(int k){
+		printNodeAtDistanceK(k,root);
+	}
+	
+	private void printNodeAtDistanceK(int k, BinarySearchTreeNode<Integer> root) {
+		if(root == null){
+			return;
+		}
+		if(k==0 ){
+			System.out.print(root.data+" ");
+			return;
+		} 
+		printNodeAtDistanceK(k-1, root.leftChild);
+		printNodeAtDistanceK(k-1, root.rightChild);
+	}
+	
 	/**
 	 *  Take Input function which builds a tree
 	 * @return
@@ -77,7 +107,7 @@ public class BinarySearchTree {
 		while(pendingNode.getSize()!=0){
 
 			BinarySearchTreeNode<Integer> present = pendingNode.popElement();
-			System.out.println("Enter the left child for" + present.data);
+//			System.out.println("Enter the left child for" + present.data);
 			int leftData = Integer.parseInt(input.get(index));
 			index++;
 			if(leftData!=-1){
@@ -87,7 +117,7 @@ public class BinarySearchTree {
 				pendingNode.addElement(leftNode);
 			}
 
-			System.out.println("Enter the right child for" + present.data);
+//			System.out.println("Enter the right child for" + present.data);
 			int rightData = Integer.parseInt(input.get(index));
 			index++;
 			if(rightData!=-1){

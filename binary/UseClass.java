@@ -24,7 +24,7 @@ public class UseClass {
 		BinarySearchTreeNode<Integer> root =  bst.takeInput(input);
 		
 		//System.out.println(root);
-		bst.printTreeLevelWise();
+//		bst.printTreeLevelWise();
 		
 		/**
 		 *  For getting number of nodes greater than a node in tree.
@@ -36,8 +36,8 @@ public class UseClass {
 		/**
 		 * 
 		 */
-		System.out.println(bst.greater(35));
-
+//		System.out.println(bst.greater(35));
+//		bst.printNodeAtDistanceK(2);
 	}
 
 }

@@ -25,8 +25,8 @@ public class Solution {
 
 	public static void main(String[] args) {
 
-		int [] input = {1,2,3,4,5,6,7,8,9};
-		int [] input1 = {2, 3, 5, 6};
+		int [] input = {1, 4, 20, 3, 10, 5};
+//		int [] input1 = {2, 3, 5, 6};
 		//		leadersInArray(input);
 		//		System.out.println(medianSorted(input, input1));
 		//		sortElementByFrequency_v2(input);
@@ -51,15 +51,158 @@ public class Solution {
 		//		smallestMissingNumber(input, 10);
 		//		findMinimumDistanceBetweenTwoNumbers(input, 3, 2);
 		//		System.out.println(binarySearch(input, 0, input.length-1, 7));
+		//		System.out.println(binarySearch(input, 23));
+		//		selectionSort(input);
+		//		countSmallerElementsOnRight(input);
+		findSubarrayWithSum(33, input);
+		
+	}
+	
+	/**
+	 * Find subarray with given sum
+	 */
+	public static void findSubarrayWithSum(int sum,int[] input){
+		for(int i=0;i<input.length;i++){
+			int value = 0;
+			for(int j=i;j<input.length;j++){
+				value = value + input[j];
+				if(value == sum){
+					System.out.println("Index are "+ i +" "+ j);
+				}
+			}
+			
+		}
+	}
+	
+	public static void findSubarrayWithSum_v1(int sum,int[] input){
+		
+	}
+	
+	
+	/**
+	 *  Implement two stacks in an array for Fixed Size
+	 */
+	public class TwoStacksInArray<T>{
+		private static final int INITIAL_ELEMENT = 10;
+		private ArrayList<T> list;
+		private int stackSize_1;
+		private int stackSize_2;
+		private int lastInsertedElement_1;
+		private int lastInsertedElement_2;
+		
+		public TwoStacksInArray(){
+			list = new ArrayList<T>(INITIAL_ELEMENT);
+			lastInsertedElement_1 = 0;
+			lastInsertedElement_2 = INITIAL_ELEMENT-1;
+			stackSize_1 = 0;
+			stackSize_2 = 0;
+		}
+		
+		public int getStack2Size(){
+			return stackSize_2;
+		}
+		
+		public int getStack1Size(){
+			return stackSize_1;
+		}
+		
+		public void pushElementToStack_1(T element){
+			list.add(element);
+			lastInsertedElement_1++;
+			stackSize_1++;
+		}
+		
+		public void pushElementToStack_2(T element){
+			list.add(element);
+			lastInsertedElement_2--;
+			stackSize_1++;
+		}
+		
+		public void popElementFromStack_1(){
+			list.remove(--lastInsertedElement_1);
+			stackSize_1--;
+		}
+		
+		public void popElementFromStack_2(){
+			list.remove(++lastInsertedElement_2);
+			stackSize_1--;
+		}
+		
+	}
+	
+	
+	/**
+	 *  Minimum number of jumps to reach end
+	 */
+	
+//	public static int minimumJumps(int[] input,int pos,int steps){
+//		if(pos>=input.length-1){
+//			return steps;
+//		}
+//		int canSkip = input[pos];
+//		int min = Integer.MAX_VALUE;
+//		for(int i=pos+1;i<=pos+canSkip;i++){
+//			int steps = minimumJumps(input, pos, steps)
+//		}
+//		
+//		
+//		
+//	}
 
+	/**
+	 *  Count smaller elements on right side
+	 */
+	// Brute Force
+	public static void countSmallerElementsOnRight(int[] input){
+		for(int i=0;i<input.length;i++){
+			int element = input[i];
+			int count = 0;
+			for(int j=i+1;j<input.length;j++){
+				if(input[j]<element){
+					count++;
+				}
+			}
+			System.out.println(count);
+		}
 	}
 
+	// Optimized Approach
+	public static void countSmallerElementsOnRight_v2(int[] input){
+		
+	}
+
+	/**
+	 * Selection Sort
+	 */
+	public static void selectionSort(int[] input){
+		for(int i=0;i<input.length-1;i++){
+			int min = Integer.MAX_VALUE;
+			int minIndex = -1;
+			for(int j =i+1;j<input.length;j++ ){
+				if(input[j]<min){
+					min = input[j];
+					minIndex = j;
+				}
+			}
+			if(min!=Integer.MAX_VALUE && minIndex != -1){
+				int temp = input[i];
+				input[i] = input[minIndex];
+				input[minIndex] = temp;
+			}
+		}
+
+		for(int i:input){
+			System.out.println(i);
+		}
+
+	}
 
 
 	/**
 	 * Binary Search
 	 */
 
+	// Recursive Version
 	public static int binarySearch(int[] input, int low, int high,int x){
 		if(low>high){
 			return -1;
@@ -74,6 +217,23 @@ public class Solution {
 		}
 	}
 
+	// Iterative Version
+	private static int binarySearch(int[] input, int x){
+		int l = 0;
+		int r = input.length-1;
+		while(l<=r){
+			int mid = l + (r-l)/2;
+			if(input[mid]==x){
+				return mid;
+			}else if(x>input[mid]){
+				l = mid +1;
+			}else{
+				r = mid -1;
+			}
+
+		}
+		return -1;
+	}
 
 	/**
 	 *  Sum of the elements in the given array
@@ -1095,7 +1255,14 @@ public class Solution {
 	 */
 
 	// Simple Traversal
-
+	private static void fixPoint(int[] input){
+		for(int i = 0;i<input.length;i++){
+			if(i==input[i]){
+				System.out.println("found an fixed point "+i);
+				return;
+			}
+		}
+	}
 
 
 
