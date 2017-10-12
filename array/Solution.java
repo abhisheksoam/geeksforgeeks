@@ -25,8 +25,8 @@ public class Solution {
 
 	public static void main(String[] args) {
 
-		int [] input = {1, 4, 20, 3, 10, 5};
-//		int [] input1 = {2, 3, 5, 6};
+		int [] input = {4, 4, 100, 5000, 4, 4, 4, 4, 100, 100};
+		//		int [] input1 = {2, 3, 5, 6};
 		//		leadersInArray(input);
 		//		System.out.println(medianSorted(input, input1));
 		//		sortElementByFrequency_v2(input);
@@ -54,10 +54,117 @@ public class Solution {
 		//		System.out.println(binarySearch(input, 23));
 		//		selectionSort(input);
 		//		countSmallerElementsOnRight(input);
-		findSubarrayWithSum(33, input);
+		//		findSubarrayWithSum_v1(33, input);
+		//		findSubarrayWithSum(33, input);
+		//		findTriplets_v1(input, 24);
+		//		findSmallPositiveNumberFromUnsorted(input);
+//			findTwoNumberWithOddOcc(input);
+	}
+	
+	/**
+	 *  Maximum product subarray
+	 */
+	public static int maxmumProductSubarray(int[] input){
 		
 	}
 	
+	
+	/**
+	 * Find the two numbers with odd occurrences in an unsorted array
+	 */
+	// O(n) time complexity and O(n) space complexity
+	public static void findTwoNumberWithOddOcc(int[] input){
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for(int i=0;i<input.length;i++){
+			if(map.containsKey(input[i])){
+				map.put(input[i], map.get(input[i])+1);
+			}else{
+				map.put(input[i],1);
+			}
+		}
+		
+		Iterator<Entry<Integer, Integer>> it = map.entrySet().iterator();
+		while(it.hasNext()){
+			Entry p = it.next();
+			if((int)p.getValue()%2!=0){
+				System.out.println(p.getKey());
+			}
+		}
+	}
+
+	// O(n) time complexity and O(1) space complexity
+	public static void findTwoNumberWithOddOcc_v1(int[] input){
+		
+	}
+	
+	/**
+	 * Find the smallest positive number missing from an unsorted array
+	 */
+	// O(n) time complexity and O(n) space complexity
+	public static void findSmallPositiveNumberFromUnsorted(int[] input){
+		HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+		int maximumElement = Integer.MIN_VALUE;
+		for(int i=0;i<input.length;i++){
+			if(input[i]>0){
+				map.put(input[i],true);
+			}
+			if(input[i]>maximumElement){
+				maximumElement = input[i];
+			}
+		}
+
+		for(int i=1;i<maximumElement;i++){
+			if(!map.containsKey(i)){
+				System.out.println("Min value "+i);
+				return;
+			}
+		}
+	}
+
+	// O(n) time complexity and O(1) space complexity
+	public static void findSmallPositiveNumberFromUnsorted_v1(int[] input){
+
+				
+	}
+
+
+
+	/**
+	 *  Find a Triplet equal to the given sum
+	 */
+
+	// Brute Force
+	public static void findTriplets(int[] input,int sum){
+		for(int i=0;i<input.length;i++){
+			for(int j=0;j<input.length;j++){
+				for(int k=0;k<input.length;k++){
+					if(input[i]+input[j]+input[k] == sum){
+						System.out.println(input[i]+" "+input[j]+" "+input[k]);
+						return;
+					}
+				}
+			}
+		}
+	}
+	// Optimized version, This method assumes All elements in array are unique
+	public static void findTriplets_v1(int[] input, int sum){
+		HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+		for(int i=0;i<input.length;i++){
+			map.put(input[i],true);
+		}
+
+		for(int i=0;i<input.length;i++){
+			for(int j=0;j<input.length;j++){
+				int value = input[i]+input[j];
+				if (map.containsKey(sum-value)){
+					System.out.println(input[i]+" "+input[j]+" "+(sum-value));
+					return;
+				}
+			}
+		}
+	}
+
+
 	/**
 	 * Find subarray with given sum
 	 */
@@ -70,15 +177,36 @@ public class Solution {
 					System.out.println("Index are "+ i +" "+ j);
 				}
 			}
-			
+
 		}
 	}
-	
+
 	public static void findSubarrayWithSum_v1(int sum,int[] input){
-		
+		int currentSum = input[0];
+		int lastIndex = 0;
+		for(int i=1;i<input.length;i++){
+			if(currentSum==sum){
+				System.out.println("Index are "+ lastIndex +" "+ i);
+				return;
+			}else if(currentSum>sum){
+				while(currentSum>sum){
+					currentSum = currentSum - input[lastIndex];
+					lastIndex++;
+				}
+
+				if(currentSum==sum){
+					System.out.println("Index are "+ lastIndex +" "+ i);
+					return;
+				}
+
+			}
+			currentSum = currentSum + input[i];
+
+		}
+		System.out.println("Doesn't contain");
 	}
-	
-	
+
+
 	/**
 	 *  Implement two stacks in an array for Fixed Size
 	 */
@@ -89,7 +217,7 @@ public class Solution {
 		private int stackSize_2;
 		private int lastInsertedElement_1;
 		private int lastInsertedElement_2;
-		
+
 		public TwoStacksInArray(){
 			list = new ArrayList<T>(INITIAL_ELEMENT);
 			lastInsertedElement_1 = 0;
@@ -97,57 +225,57 @@ public class Solution {
 			stackSize_1 = 0;
 			stackSize_2 = 0;
 		}
-		
+
 		public int getStack2Size(){
 			return stackSize_2;
 		}
-		
+
 		public int getStack1Size(){
 			return stackSize_1;
 		}
-		
+
 		public void pushElementToStack_1(T element){
 			list.add(element);
 			lastInsertedElement_1++;
 			stackSize_1++;
 		}
-		
+
 		public void pushElementToStack_2(T element){
 			list.add(element);
 			lastInsertedElement_2--;
 			stackSize_1++;
 		}
-		
+
 		public void popElementFromStack_1(){
 			list.remove(--lastInsertedElement_1);
 			stackSize_1--;
 		}
-		
+
 		public void popElementFromStack_2(){
 			list.remove(++lastInsertedElement_2);
 			stackSize_1--;
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 *  Minimum number of jumps to reach end
 	 */
-	
-//	public static int minimumJumps(int[] input,int pos,int steps){
-//		if(pos>=input.length-1){
-//			return steps;
-//		}
-//		int canSkip = input[pos];
-//		int min = Integer.MAX_VALUE;
-//		for(int i=pos+1;i<=pos+canSkip;i++){
-//			int steps = minimumJumps(input, pos, steps)
-//		}
-//		
-//		
-//		
-//	}
+
+	//	public static int minimumJumps(int[] input,int pos,int steps){
+	//		if(pos>=input.length-1){
+	//			return steps;
+	//		}
+	//		int canSkip = input[pos];
+	//		int min = Integer.MAX_VALUE;
+	//		for(int i=pos+1;i<=pos+canSkip;i++){
+	//			int steps = minimumJumps(input, pos, steps)
+	//		}
+	//		
+	//		
+	//		
+	//	}
 
 	/**
 	 *  Count smaller elements on right side
@@ -168,7 +296,7 @@ public class Solution {
 
 	// Optimized Approach
 	public static void countSmallerElementsOnRight_v2(int[] input){
-		
+
 	}
 
 	/**

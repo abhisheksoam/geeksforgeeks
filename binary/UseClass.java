@@ -9,6 +9,7 @@ public class UseClass {
 
 	public static void main(String[] args) {
 		BinarySearchTree bst =  new BinarySearchTree();
+//		BinarySearchTree bst1 =  new BinarySearchTree();
 		ArrayList<String> input = new ArrayList<String>();
 		File file = new File("/Users/abhishek/Desktop/Programming/Coding/CodeJava/bin/binary/text.txt");
 		try {
@@ -22,6 +23,7 @@ public class UseClass {
 		}
 
 		BinarySearchTreeNode<Integer> root =  bst.takeInput(input);
+//		BinarySearchTreeNode<Integer> root1 = bst.takeInput(input);
 		
 		//System.out.println(root);
 //		bst.printTreeLevelWise();
@@ -38,6 +40,16 @@ public class UseClass {
 		 */
 //		System.out.println(bst.greater(35));
 //		bst.printNodeAtDistanceK(2);
+		
+		/**
+		 * Identical Trees
+		 */
+//		System.out.println(bst.identicalTree(root, root1));
+		/**
+		 * Level order traversal in spiral form
+		 * http://www.geeksforgeeks.org/level-order-traversal-in-spiral-form/
+		 */
+		bst.printLevelOrderSpiral();
 	}
 
 }

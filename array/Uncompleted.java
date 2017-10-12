@@ -27,6 +27,22 @@ public class Uncompleted{
 	 *  http://www.geeksforgeeks.org/turn-an-image-by-90-degree/
 	 */
 	
+	    // O(n) time complexity and O(1) space complexity
+		public static void findSmallPositiveNumberFromUnsorted_v1(int[] input){
+
+					
+		}
+		
+		// O(n) time complexity and O(1) space complexity
+		public static void findTwoNumberWithOddOcc_v1(int[] input){
+			
+		}
+		
+		/**
+		 *  http://www.geeksforgeeks.org/the-celebrity-problem/
+		 */
+		
+		
 
 	
 }

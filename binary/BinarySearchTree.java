@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class BinarySearchTree {
 	int size;
-	BinarySearchTreeNode<Integer> root;
+	private BinarySearchTreeNode<Integer> root;
 
 	public BinarySearchTree(){
 		root = new BinarySearchTreeNode<Integer>();
@@ -17,15 +17,6 @@ public class BinarySearchTree {
 		root = new BinarySearchTreeNode<Integer>(data);
 		size = 0;
 	}
-	
-	
-	/**
-	 *  Foldable Binary Tree
-	 *  Given a binary tree, find out if the tree can be folded or not.
-	 */
-	
-	
-	
 	
 	/**
 	 * Print all nodes at distance k from root
@@ -187,28 +178,6 @@ public class BinarySearchTree {
 		}else{
 			return false;
 
-		}
-	}
-
-	public boolean sameTree(BinarySearchTreeNode<Integer> root1, BinarySearchTreeNode<Integer> root2){
-		if(root1==null&&root2==null){
-			return true;
-		}
-		if(root1!=null&&root2!=null){
-			if(root1.data==root2.data){
-				boolean left = sameTree(root1.leftChild, root2.leftChild);
-				boolean right = sameTree(root1.rightChild, root2.rightChild);
-				if(left==true&&right==true){
-					return true;
-				}else{
-					return false;
-				}
-
-			}else{
-				return false;
-			}
-		}else{
-			return false;
 		}
 	}
 
@@ -456,21 +425,6 @@ public class BinarySearchTree {
 		
 	}
 	
-	//an arbitrary Binary Tree to a tree that holds Children Sum Property
-	
-//	public boolean childrenSum(){
-//		return childrenSum(root);
-//	}
-	
-//	private boolean childrenSum(BinarySearchTreeNode<Integer> node) {
-//		if(node == null||node.leftChild == null && node.rightChild == null){
-//			return true;
-//		}
-//		
-//		
-//		
-//	}
-	
 	// number of nodes greater than x 
 
 	/**
@@ -495,12 +449,97 @@ public class BinarySearchTree {
 		if(node.data > x){
 			return 1+greater(x,node.leftChild) + greater(x,node.rightChild);
 		}else{
-					return greater(x,node.leftChild) + greater(x,node.rightChild);
+			return greater(x,node.leftChild) + greater(x,node.rightChild);
 		}
 	}
 	
 	
+	/**
+	 *  Write Code to Determine if Two Trees are Identical
+	 *  http://www.geeksforgeeks.org/write-c-code-to-determine-if-two-trees-are-identical/
+	 */
+	
+	public boolean identicalTree(BinarySearchTreeNode<Integer> node1, BinarySearchTreeNode<Integer> node2 ){
+		if(node1 == null && node2 == null){
+			return true;
+		}
+		if (node1.data == node2.data){
+			return identicalTree(node1.leftChild, node2.leftChild) && identicalTree(node1.rightChild, node2.rightChild);
+		}
+		return false;
+		
+	}
+	
+	
+	// Repetetion of identicalTree
+	public boolean sameTree(BinarySearchTreeNode<Integer> root1, BinarySearchTreeNode<Integer> root2){
+		if(root1==null&&root2==null){
+			return true;
+		}
+		if(root1!=null&&root2!=null){
+			if(root1.data==root2.data){
+				boolean left = sameTree(root1.leftChild, root2.leftChild);
+				boolean right = sameTree(root1.rightChild, root2.rightChild);
+				if(left==true&&right==true){
+					return true;
+				}else{
+					return false;
+				}
 
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+	
+	
+	/**
+	 *  Foldable Binary Tree
+	 *  Given a binary tree, find out if the tree can be folded or not.
+	 */
+	
+	//TODO: Completed this
+	/**
+	 * given two traversal sequences construct the binary tree
+	 * http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/
+	 */
+	//TODO: Completed this
+	
+	/**
+	 * Lowest Common Ancestor in a Binary Search Tree.
+	 * http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/
+	 */
+	//TODO: Completed this
+	public BinarySearchTreeNode<Integer> LCA(int value1, int value2){
+		return LCA(value1,value2,root);
+	}
+
+	private BinarySearchTreeNode<Integer> LCA(int value1, int value2, BinarySearchTreeNode<Integer> root) {
+		if(root==null){
+			return null;
+		}
+		return null;
+	}
+	
+	/**
+	 * Level order traversal in spiral form
+	 * http://www.geeksforgeeks.org/level-order-traversal-in-spiral-form/
+	 */
+	
+	// Queue Implementation
+	public void printLevelOrderSpiral(){
+		Queue<BinarySearchTreeNode<Integer>> queue = new Queue<BinarySearchTreeNode<Integer>>();
+		String INSERTION_CATEGORY = "LEFT";
+		queue.addElement(root);
+		queue.addElement(null);
+		
+	}
+	
+	
+	
+	
 	
 
 
